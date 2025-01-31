@@ -41,7 +41,10 @@ app.get('/trade/invoicefinancing/v2/invoices', async (req, res) => {
         });
         res.json(response.data);
     } catch (error) {
-        res.status(error.response?.status || 500).json({ error: error.message });
+        res.status(error.response?.status || 500).json({ 
+            error: error.message,
+            details: error.response?.data || 'No response data'
+        });
     }
 });
 
@@ -53,7 +56,10 @@ app.post('/trade/invoicefinancing/v2/invoices/new', async (req, res) => {
         });
         res.json(response.data);
     } catch (error) {
-        res.status(error.response?.status || 500).json({ error: error.message });
+        res.status(error.response?.status || 500).json({ 
+            error: error.message,
+            details: error.response?.data || 'No response data'
+        });
     }
 });
 
@@ -66,7 +72,27 @@ app.get('/trade/invoicefinancing/v2/invoices/:id', async (req, res) => {
         });
         res.json(response.data);
     } catch (error) {
-        res.status(error.response?.status || 500).json({ error: error.message });
+        res.status(error.response?.status || 500).json({ 
+            error: error.message,
+            details: error.response?.data || 'No response data'
+        });
+    }
+});
+
+// Additional Endpoints
+app.get('/beta/unusedendpoint', async (req, res) => {
+    try {
+        res.json({ message: 'This is an unused endpoint response' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/beta/unusedendpoint2', async (req, res) => {
+    try {
+        res.json({ message: 'This is another unused endpoint response' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
